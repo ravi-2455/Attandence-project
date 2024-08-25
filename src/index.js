@@ -7,6 +7,8 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT;
 
+
+//body schema
 const entrySchema = z.object({
     eid: z.string().min(1, { message: "Employee is required" }),
     date: z.string().min(1, { message: "Date is required" }),
@@ -19,8 +21,10 @@ const exitSchema = z.object({
     exitTime: z.string().min(1, { message: "Exit time is required" })
 })
 
+//middleware
 app.use(express.json());
 
+//main route
 app.post("/mark-entry", async (req, res) => {
     try {
         const body = entrySchema.parse(req.body);
