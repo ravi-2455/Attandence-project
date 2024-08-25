@@ -35,6 +35,7 @@ app.post("/mark-entry", async (req, res) => {
                 values: [row]
             }
         })
+        res.status(200).json({ message: "Entry marked" })
     } catch (error) {
         if (error instanceof ZodError) {
             res.status(400).json({ message: error.message });
@@ -59,6 +60,7 @@ app.post("/mark-exit", async (req, res) => {
                 values: [[body.exitTime]]
             }
         })
+        res.status(200).json({ message: "Exit marked" })
     } catch (error) {
         if (error instanceof ZodError) {
             res.status(400).json({ message: error.message });
