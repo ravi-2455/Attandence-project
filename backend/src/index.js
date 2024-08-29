@@ -1,6 +1,9 @@
 import express from "express";
 import { z, ZodError } from "zod";
 import { sheets } from "./sheetClient.js";
+
+import adminRoutes from "./routes/adminRoutes.js";
+
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -22,6 +25,7 @@ const exitSchema = z.object({
 
 //middleware
 app.use(express.json());
+app.use("/", adminRoutes);
 
 //main route
 app.get("/get-employee-details", async (req, res) => {
