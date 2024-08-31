@@ -20,7 +20,6 @@ export const getTuitionStatus = async (req, res) => {
 
     if (sheetData) {
       //write logic
-
       const transformedData = sheetData.map(([date, status, reason]) => ({
         date,
         status,
@@ -30,11 +29,7 @@ export const getTuitionStatus = async (req, res) => {
       const status = transformedData.filter(
         (status) => status.date === body.date
       );
-      if (status.length === 1 && status[0].status === "open") {
-        res.status(200).json({ tuitionStatus: 1 });
-      } else {
-        res.status(200).json({ tuitionStatus: 0 });
-      }
+      res.status(200).json({ statusData: status });
     } else {
       res.status(404).json({ message: "No status found" });
     }
