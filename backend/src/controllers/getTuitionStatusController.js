@@ -14,7 +14,7 @@ export const getTuitionStatus = async (req, res) => {
     //get status.
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.SHEET_ID,
-      range: "tuition-status!A2:C",
+      range: "tuition-status!A1:C",
     });
     const sheetData = response.data.values;
 
