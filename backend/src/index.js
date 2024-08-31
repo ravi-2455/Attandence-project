@@ -47,7 +47,7 @@ app.post("/mark-entry", async (req, res) => {
     const row = Object.values(newBody);
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.SHEET_ID,
-      range: `${eid}!A3:C`,
+      range: `${eid}!A2:F`,
       insertDataOption: "INSERT_ROWS",
       valueInputOption: "RAW",
       requestBody: {
@@ -69,11 +69,11 @@ app.post("/mark-exit", async (req, res) => {
     const body = exitSchema.parse(req.body);
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.SHEET_ID,
-      range: `${body.eid}!A3:C`,
+      range: `${body.eid}!A2:F`,
     });
     await sheets.spreadsheets.values.update({
       spreadsheetId: process.env.SHEET_ID,
-      range: `${body.eid}!D${2 + response.data.values.length}`,
+      range: `${body.eid}!D${1 + response.data.values.length}`,
       valueInputOption: "RAW",
       requestBody: {
         values: [[body.exitTime]],
