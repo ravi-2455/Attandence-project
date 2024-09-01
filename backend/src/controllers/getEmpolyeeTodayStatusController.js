@@ -15,14 +15,19 @@ export const getEmpolyeeTodayStatusController = async (req, res) => {
     const { eid, date } = body;
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.SHEET_ID,
-      range: `${eid}!A1:C`,
+      range: `${eid}!A1:E`,
     });
     const sheetData = response.data.values;
-    const transformedData = sheetData.map(([date, name, status]) => ({
-      date,
-      name,
-      status,
-    }));
+
+    const transformedData = sheetData.map(
+      ([date, name, status, entryTime, exitTime]) => ({
+        date,
+        name,
+        status,
+        entryTime,
+        exitTime,
+      })
+    );
     const responseData = transformedData.filter((data) => data.date === date);
     res.status(200).json({ data: responseData });
   } catch (error) {
